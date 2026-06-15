@@ -7,15 +7,28 @@ const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mon
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://amaanahmad.dev"),
-  title: "Amaan Ahmad | AI-Native Full-Stack Engineer",
-  description: "Portfolio of Amaan Ahmad - Building million-dollar projects with AI, Web3, and Next.js.",
-  keywords: ["Full Stack Developer", "Web3", "AI Engineer", "Solana", "Next.js", "React", "Portfolio"],
-  authors: [{ name: "Amaan Ahmad" }],
+  title: "Amaan Ahmad | Full-Stack & AI / Web3 Engineer",
+  description:
+    "Portfolio of Amaan Ahmad — Founder @ CIT India. Building production-grade products across AI, Web3 (Solana), and the web. 70+ open-source repositories.",
+  keywords: [
+    "Amaan Ahmad", "Full Stack Developer", "Web3 Developer", "AI Engineer",
+    "Solana", "Next.js", "React", "TypeScript", "Rust", "CIT India", "Portfolio",
+  ],
+  authors: [{ name: "Amaan Ahmad", url: "https://github.com/iamaanahmad" }],
+  creator: "Amaan Ahmad",
   openGraph: {
-    title: "Amaan Ahmad | AI-Native Full-Stack Engineer",
-    description: "Building the future with AI & Web3.",
+    title: "Amaan Ahmad | Full-Stack & AI / Web3 Engineer",
+    description: "Founder @ CIT India. Building the future with AI, Web3 & the web.",
+    url: "https://amaanahmad.dev",
+    siteName: "Amaan Ahmad",
     type: "website",
     images: ["/og-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Amaan Ahmad | Full-Stack & AI / Web3 Engineer",
+    description: "Founder @ CIT India. Building the future with AI, Web3 & the web.",
+    creator: "@i_amaanahmad",
   },
 };
 
