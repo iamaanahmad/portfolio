@@ -50,10 +50,10 @@ function drawParticle(ctx: CanvasRenderingContext2D, p: ParticleObj) {
 // ============================================================
 const PROFILE = {
   name: "Amaan Ahmad",
-  role: "Full-Stack Web/App Developer & AI/Web3 Engineer",
+  role: "AI-Native Full-Stack Engineer & Founder @ CIT India",
   handle: "iamaanahmad",
   tagline:
-    "Founder @ CIT India. I build custom Web & Mobile Applications to help businesses achieve digital growth, alongside autonomous AI agents, Solana protocols, and Multilingual AI services.",
+    "Architecting high-performance Web & Mobile Applications to drive digital growth for clients, backed by specialized depth in autonomous AI agents, Solana protocols, and multilingual AI models.",
   location: "New Delhi, India",
   email: "amaan@cit.org.in",
   resume: "/Resume.Techie.pdf",
@@ -510,7 +510,7 @@ const InteractiveTerminal = ({ onToast }: { onToast: (msg: string) => void }) =>
       case 'whoami':
         newHistory.push({
           type: 'output',
-          text: "Amaan Ahmad — Full-Stack Web/App Developer & Founder @ CIT India. Helping businesses scale with web & mobile apps, AI tools & Web3 protocols. Amazon Author & KnowledgeSense Content Writer.",
+          text: "Amaan Ahmad — AI-Native Full-Stack Engineer & Founder @ CIT India.\nPrimary Focus: Custom Web & Mobile Application Engineering.\nSpecialized Pillars: Autonomous AI Tooling, Solana Protocols, Multilingual AI Datasets & Technical Publishing.",
         });
         break;
       case 'projects':
@@ -522,7 +522,7 @@ const InteractiveTerminal = ({ onToast }: { onToast: (msg: string) => void }) =>
       case 'skills':
         newHistory.push({
           type: 'output',
-          text: "TECH STACK: TypeScript, Python, Rust, Solana, Next.js, Gemini, Codex, TLA+, MCP.\nTRANSLATION SKILLS: Data Annotation, AI Model Training, Transliteration, Subtitling across Hindi, Urdu, English & Arabic.",
+          text: "PRIMARY ENGINE: TypeScript, Next.js, React, React Native, Python, Node.js, Cloud APIs.\nSPECIALIZED PILLARS: Solana, Anchor, Rust, TLA+, MCP, AI Agents, RLHF & Multilingual Datasets (Hindi, Urdu, Arabic, English).",
         });
         break;
       case 'books':
@@ -635,8 +635,8 @@ const InteractiveTerminal = ({ onToast }: { onToast: (msg: string) => void }) =>
 
 const ExperienceTimeline = () => {
   const items = [
-    { year: "2026", role: "AI & Developer Tooling Lead", desc: "Author of kiro-pro-free (167★), everything-kiro (26★), and everything-antigravity. Architecting multi-agent workflow packs around skills, plugins, hooks, AGENTS.md, and MCP." },
-    { year: "2025", role: "Founder @ CIT India", desc: "Building secure digital platforms, Solana protocols, and enterprise software. Shipped AgentMarket, FirstStep SDK, and formal verification frameworks." },
+    { year: "2026", role: "AI-Native Full-Stack & Tooling Architect", desc: "Author of kiro-pro-free (167★), everything-kiro (26★), and everything-antigravity. Building multi-agent AI tooling around skills, plugins, AGENTS.md, and MCP." },
+    { year: "2025", role: "Founder & Lead Developer @ CIT India", desc: "Delivering high-performance Web & Mobile platforms, Solana protocols, and enterprise software (AgentMarket, FirstStep SDK)." },
     { year: "2024", role: "Web3 & AI Verification Engineer", desc: "Formally verified Solana Alpenglow consensus via TLA+ with 100% mathematical success rate across 70+ public GitHub repos." },
     { year: "2023", role: "Multilingual AI & Translation Specialist", desc: "Specializing in Data Annotation, AI Model Training, Transliteration, Subtitling, and localization across Hindi, Urdu, English, and Arabic." },
     { year: "2022", role: "Community Lead & Full-Stack Developer", desc: "Scaled the Free Fire Community to 450K+ members and created FreeFireItems explorer with open data APIs." },
@@ -912,13 +912,13 @@ const translationServices: Project[] = [
   },
 ];
 
-type Category = 'ai' | 'web3' | 'web2' | 'translation';
+type Category = 'web2' | 'ai' | 'web3' | 'translation';
 
 const PROJECT_GROUPS: Record<Category, { label: string; icon: React.ReactNode; data: Project[] }> = {
-  ai: { label: "AI & Tooling", icon: <Sparkles size={14} />, data: aiProjects },
-  web3: { label: "Web3 / Solana", icon: <Cpu size={14} />, data: web3Projects },
-  web2: { label: "Web & SaaS", icon: <Globe size={14} />, data: web2Projects },
-  translation: { label: "AI Translation & Annotation", icon: <Languages size={14} />, data: translationServices },
+  web2: { label: "Full-Stack & Mobile Apps", icon: <Globe size={14} />, data: web2Projects },
+  ai: { label: "AI Agents & Tooling", icon: <Sparkles size={14} />, data: aiProjects },
+  web3: { label: "Solana & Web3 Systems", icon: <Cpu size={14} />, data: web3Projects },
+  translation: { label: "Multilingual AI & Datasets", icon: <Languages size={14} />, data: translationServices },
 };
 
 // ============================================================
@@ -1015,7 +1015,7 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [category, setCategory] = useState<Category>('ai');
+  const [category, setCategory] = useState<Category>('web2');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [toastMsg, setToastMsg] = useState<string | null>(null);
@@ -1222,7 +1222,7 @@ export default function Home() {
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
                   <div className="px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 text-xs font-mono uppercase tracking-widest flex items-center gap-2">
                     <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-                    Available for Hire & AI/Web3 Collaborations
+                    Available for Hire & Enterprise Software Engineering
                   </div>
                 </motion.div>
 
@@ -1235,10 +1235,28 @@ export default function Home() {
 
                 <motion.p
                   initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
-                  className="text-base md:text-lg text-slate-400 max-w-2xl mb-8 leading-relaxed"
+                  className="text-base md:text-lg text-slate-400 max-w-2xl mb-6 leading-relaxed"
                 >
                   {PROFILE.tagline}
                 </motion.p>
+
+                {/* Primary Specialty & Domain Pillars Box */}
+                <div className="w-full max-w-2xl mb-8 p-3.5 rounded-lg bg-slate-900/80 border border-cyan-500/30 font-mono text-xs text-slate-300 shadow-xl relative overflow-hidden text-left">
+                  <CornerBrackets />
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 border-b border-slate-800 pb-2 mb-2">
+                    <span className="text-cyan-400 font-bold uppercase tracking-wider text-[11px] flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                      CORE ANCHOR: AI-Native Web & Mobile App Development
+                    </span>
+                    <span className="text-[10px] text-slate-400 uppercase tracking-widest bg-slate-800 px-2 py-0.5 rounded">Founder @ CIT India</span>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px] text-slate-300 pt-1">
+                    <div className="flex items-center gap-1.5"><span className="text-cyan-400">🤖</span> AI Agent Tooling</div>
+                    <div className="flex items-center gap-1.5"><span className="text-cyan-400">⚡</span> Solana Protocols</div>
+                    <div className="flex items-center gap-1.5"><span className="text-cyan-400">🗣️</span> Multilingual AI</div>
+                    <div className="flex items-center gap-1.5"><span className="text-cyan-400">📚</span> Kindle Author</div>
+                  </div>
+                </div>
 
                 {/* Primary Actions including Download Resume */}
                 <div className="flex flex-wrap gap-4 justify-center lg:justify-start mb-10 w-full sm:w-auto">
@@ -1340,23 +1358,33 @@ export default function Home() {
               <div className="w-full lg:w-1/2">
                 <div className="text-cyan-500 font-mono text-xs uppercase tracking-widest mb-2">/ Executive Profile</div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                  Empowering businesses through <span className="text-cyan-500">custom Web/App development & AI</span>
+                  Empowering businesses through <span className="text-cyan-500">AI-Native Web & Mobile Engineering</span>
                 </h2>
                 <p className="text-slate-400 mb-6 text-base leading-relaxed">
-                  Founder of <strong className="text-white">CIT India</strong>. I specialize in building high-performance <strong className="text-cyan-300">Web & Mobile Applications</strong> that accelerate business digital growth, alongside autonomous AI tools, Solana protocols, published technical books, and multilingual translation services.
+                  Founder of <strong className="text-white">CIT India</strong>. My primary specialty is building high-performance <strong className="text-cyan-300">Web & Mobile Applications</strong> that accelerate client digital growth, complemented by deep specialization in autonomous AI agent systems, Solana blockchain protocols, published technical eBooks, and multilingual AI translation services.
                 </p>
 
-                {/* Plain-English Summary for Non-Technical Visitors */}
-                <div className="mb-8 p-4 rounded-lg bg-slate-900/60 border border-slate-800 font-mono text-xs text-slate-300 space-y-2 relative overflow-hidden">
+                {/* Capability Architecture Summary */}
+                <div className="mb-8 p-4 rounded-lg bg-slate-900/60 border border-slate-800 font-mono text-xs text-slate-300 space-y-3 relative overflow-hidden">
                   <CornerBrackets />
-                  <div className="text-cyan-400 font-bold uppercase tracking-wider text-[11px] flex items-center gap-1.5">
-                    <Sparkles size={13} /> At a Glance (What I Do):
+                  <div className="text-cyan-400 font-bold uppercase tracking-wider text-[11px] flex items-center justify-between border-b border-slate-800 pb-2">
+                    <span className="flex items-center gap-1.5"><Sparkles size={13} /> Capabilities & Specialty Hierarchy:</span>
+                    <span className="text-[10px] text-cyan-500/80">Primary Anchor + 4 Pillars</span>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-300">
-                    <div className="flex items-center gap-2"><span className="text-cyan-400">🌐</span> <strong>Web & App Development:</strong> Helping businesses grow digitally</div>
-                    <div className="flex items-center gap-2"><span className="text-cyan-400">⚡</span> <strong>AI & Web3 Engineering:</strong> Autonomous tools & protocols</div>
-                    <div className="flex items-center gap-2"><span className="text-cyan-400">🏢</span> <strong>Founder @ CIT India:</strong> Custom software & agency leadership</div>
-                    <div className="flex items-center gap-2"><span className="text-cyan-400">📚</span> <strong>Author & Translator:</strong> Amazon eBooks & Multilingual AI</div>
+                  <div className="space-y-2 text-slate-300">
+                    <div className="flex items-start gap-2 bg-cyan-500/10 p-2.5 rounded border border-cyan-500/30">
+                      <span className="text-cyan-400 shrink-0 mt-0.5 font-bold">🎯</span>
+                      <div>
+                        <strong className="text-white font-mono uppercase text-[11px] tracking-wider block text-cyan-300">Primary Anchor — Full-Stack & Mobile Development:</strong>
+                        <p className="text-[11px] text-slate-300 leading-snug">Custom web apps, mobile solutions, cloud platforms, and agency leadership @ CIT India.</p>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-300 pt-1">
+                      <div className="flex items-center gap-2"><span className="text-cyan-400">🤖</span> <strong>AI Agents:</strong> Antigravity, Kiro, Codex, MCP</div>
+                      <div className="flex items-center gap-2"><span className="text-cyan-400">⚡</span> <strong>Solana Web3:</strong> Protocols & TLA+ Verification</div>
+                      <div className="flex items-center gap-2"><span className="text-cyan-400">🗣️</span> <strong>Multilingual AI:</strong> Data Annotation & RLHF</div>
+                      <div className="flex items-center gap-2"><span className="text-cyan-400">📚</span> <strong>Authoring:</strong> Amazon eBooks & Articles</div>
+                    </div>
                   </div>
                 </div>
 

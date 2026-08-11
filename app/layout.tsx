@@ -7,12 +7,12 @@ const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mon
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://amaan.cit.org.in"),
-  title: "Amaan Ahmad | Full-Stack Web/App Developer & AI/Web3 Engineer",
+  title: "Amaan Ahmad | AI-Native Full-Stack Engineer & Founder @ CIT India",
   description:
-    "Portfolio of Amaan Ahmad — Founder @ CIT India, Full-Stack Web & App Developer helping businesses scale with custom web & mobile applications, AI agents, Solana protocols, and digital solutions.",
+    "Portfolio of Amaan Ahmad — AI-Native Full-Stack Engineer & Founder @ CIT India. Building custom web & mobile applications to drive digital growth, backed by specialized depth in AI agents, Solana protocols, and digital solutions.",
   keywords: [
-    "Amaan Ahmad", "Web Developer", "App Developer", "Full Stack Developer", "Business Growth",
-    "AI Engineer", "Developer Tooling", "Solana", "Next.js", "React", "TypeScript", "Rust", "CIT India",
+    "Amaan Ahmad", "AI-Native Engineer", "Full Stack Developer", "Web Developer", "App Developer", "Business Growth",
+    "AI Agents", "Developer Tooling", "Solana", "Next.js", "React", "TypeScript", "Rust", "CIT India",
     "Data Annotation", "AI Training", "Transliteration", "Subtitling", "Language Translation", "Amazon Author"
   ],
   authors: [{ name: "Amaan Ahmad", url: "https://github.com/iamaanahmad" }],
@@ -38,8 +38,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Amaan Ahmad | Full-Stack Web/App Developer & AI/Web3 Engineer",
-    description: "Founder @ CIT India. Helping businesses scale with custom Web & Mobile Applications, AI tools, Solana protocols, and digital growth solutions.",
+    title: "Amaan Ahmad | AI-Native Full-Stack Engineer & Founder @ CIT India",
+    description: "Founder @ CIT India. Building high-performance Web & Mobile Applications to drive digital growth, backed by specialized depth in autonomous AI agents, Solana protocols, and digital solutions.",
     url: "https://amaan.cit.org.in",
     siteName: "Amaan Ahmad Portfolio",
     type: "profile",
@@ -48,14 +48,14 @@ export const metadata: Metadata = {
         url: "/amaan-photo.jpg",
         width: 800,
         height: 800,
-        alt: "Amaan Ahmad - Full-Stack Web/App Developer & Founder @ CIT India",
+        alt: "Amaan Ahmad - AI-Native Full-Stack Engineer & Founder @ CIT India",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Amaan Ahmad | Full-Stack Web/App Developer & AI/Web3 Engineer",
-    description: "Founder @ CIT India. Helping businesses scale with custom Web & Mobile Applications, AI tools, Solana protocols, and digital growth solutions.",
+    title: "Amaan Ahmad | AI-Native Full-Stack Engineer & Founder @ CIT India",
+    description: "Founder @ CIT India. Building high-performance Web & Mobile Applications to drive digital growth, backed by specialized depth in autonomous AI agents, Solana protocols, and digital solutions.",
     creator: "@i_amaanahmad",
     images: ["/amaan-photo.jpg"],
   },
