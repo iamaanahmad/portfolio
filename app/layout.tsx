@@ -7,14 +7,13 @@ const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mon
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://amaan.cit.org.in"),
-  title: "Amaan Ahmad | AI, Solana, Developer Tooling & Multilingual Specialist",
+  title: "Amaan Ahmad | Full-Stack Web/App Developer & AI/Web3 Engineer",
   description:
-    "Portfolio of Amaan Ahmad — Founder @ CIT India, open-source builder (kiro-pro-free, everything-kiro), published Amazon author, KnowledgeSense content writer, AI/Web3 engineer, and Multilingual AI & Translation Specialist.",
+    "Portfolio of Amaan Ahmad — Founder @ CIT India, Full-Stack Web & App Developer helping businesses scale with custom web & mobile applications, AI agents, Solana protocols, and digital solutions.",
   keywords: [
-    "Amaan Ahmad", "AI Engineer", "Developer Tooling", "Codex", "AI Agents",
-    "Solana", "Next.js", "React", "TypeScript", "Rust", "MCP", "CIT India", "Portfolio",
-    "Data Annotation", "AI Training", "Transliteration", "Subtitling", "Language Translation",
-    "Hindi Translation", "Urdu Translation", "Arabic Translation", "Amazon Author", "KnowledgeSense"
+    "Amaan Ahmad", "Web Developer", "App Developer", "Full Stack Developer", "Business Growth",
+    "AI Engineer", "Developer Tooling", "Solana", "Next.js", "React", "TypeScript", "Rust", "CIT India",
+    "Data Annotation", "AI Training", "Transliteration", "Subtitling", "Language Translation", "Amazon Author"
   ],
   authors: [{ name: "Amaan Ahmad", url: "https://github.com/iamaanahmad" }],
   creator: "Amaan Ahmad",
@@ -39,8 +38,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Amaan Ahmad | AI, Solana, Tooling & Multilingual Specialist",
-    description: "Founder @ CIT India. Building AI agents, Solana protocols, developer tooling, published author, and providing AI Translation & Annotation services.",
+    title: "Amaan Ahmad | Full-Stack Web/App Developer & AI/Web3 Engineer",
+    description: "Founder @ CIT India. Helping businesses scale with custom Web & Mobile Applications, AI tools, Solana protocols, and digital growth solutions.",
     url: "https://amaan.cit.org.in",
     siteName: "Amaan Ahmad Portfolio",
     type: "profile",
@@ -49,14 +48,14 @@ export const metadata: Metadata = {
         url: "/amaan-photo.jpg",
         width: 800,
         height: 800,
-        alt: "Amaan Ahmad - Founder @ CIT India",
+        alt: "Amaan Ahmad - Full-Stack Web/App Developer & Founder @ CIT India",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Amaan Ahmad | AI, Solana, Tooling & Multilingual Specialist",
-    description: "Founder @ CIT India. Building AI agents, Solana protocols, developer tooling, and providing AI Translation & Annotation services.",
+    title: "Amaan Ahmad | Full-Stack Web/App Developer & AI/Web3 Engineer",
+    description: "Founder @ CIT India. Helping businesses scale with custom Web & Mobile Applications, AI tools, Solana protocols, and digital growth solutions.",
     creator: "@i_amaanahmad",
     images: ["/amaan-photo.jpg"],
   },
@@ -83,7 +82,7 @@ export default function RootLayout({
           "https://www.amazon.com/author/amaan",
           "https://www.knowledgesense.in/author/administer/"
         ],
-        jobTitle: "Founder & Lead Engineer",
+        jobTitle: "Founder & Full-Stack Web/App Developer",
         worksFor: {
           "@type": "Organization",
           name: "CIT India",

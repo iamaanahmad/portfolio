@@ -9,6 +9,7 @@ import {
   Search, BookOpen, Languages, Copy, Check, ArrowUp,
   ShieldCheck, Layers, FileText, Feather
 } from 'lucide-react';
+import GitHubActivity from '@/components/GitHubActivity';
 
 interface ParticleObj {
   x: number;
@@ -49,10 +50,10 @@ function drawParticle(ctx: CanvasRenderingContext2D, p: ParticleObj) {
 // ============================================================
 const PROFILE = {
   name: "Amaan Ahmad",
-  role: "Full-Stack AI, Web3 & Developer Tooling Engineer",
+  role: "Full-Stack Web/App Developer & AI/Web3 Engineer",
   handle: "iamaanahmad",
   tagline:
-    "Founder @ CIT India. Author & Content Writer. I build production-grade AI agents, Solana protocols, Codex tooling, and provide Multilingual AI & Translation services — shipping products that scale.",
+    "Founder @ CIT India. I build custom Web & Mobile Applications to help businesses achieve digital growth, alongside autonomous AI agents, Solana protocols, and Multilingual AI services.",
   location: "New Delhi, India",
   email: "amaan@cit.org.in",
   resume: "/Resume.Techie.pdf",
@@ -509,7 +510,7 @@ const InteractiveTerminal = ({ onToast }: { onToast: (msg: string) => void }) =>
       case 'whoami':
         newHistory.push({
           type: 'output',
-          text: "Amaan Ahmad — Founder @ CIT India. AI/Web3 Engineer, Amazon Author & KnowledgeSense Content Writer. 70+ public repos on GitHub, community leader of 450K+ members.",
+          text: "Amaan Ahmad — Full-Stack Web/App Developer & Founder @ CIT India. Helping businesses scale with web & mobile apps, AI tools & Web3 protocols. Amazon Author & KnowledgeSense Content Writer.",
         });
         break;
       case 'projects':
@@ -595,7 +596,7 @@ const InteractiveTerminal = ({ onToast }: { onToast: (msg: string) => void }) =>
 
       {/* Command suggestion buttons */}
       <div className="px-4 py-2 border-t border-slate-800/60 bg-slate-950/60 flex items-center gap-2 overflow-x-auto text-[11px]">
-        <span className="text-slate-500 shrink-0 font-bold">Quick:</span>
+        <span className="text-slate-400 shrink-0 font-bold">Click to run:</span>
         {['whoami', 'projects', 'skills', 'books', 'resume', 'contact', 'sudo hire', 'clear'].map((cmd) => (
           <button
             key={cmd}
@@ -1074,6 +1075,7 @@ export default function Home() {
   const navLinks = [
     { href: '#about', label: 'About' },
     { href: '#projects', label: 'Projects' },
+    { href: '#github-stats', label: 'GitHub Stats' },
     { href: '#author', label: 'Books & Writing' },
     { href: '#translation', label: 'Translation' },
     { href: '#stack', label: 'Stack' },
@@ -1338,12 +1340,25 @@ export default function Home() {
               <div className="w-full lg:w-1/2">
                 <div className="text-cyan-500 font-mono text-xs uppercase tracking-widest mb-2">/ Executive Profile</div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                  Architecting software & <span className="text-cyan-500">intelligent agent ecosystems</span>
+                  Empowering businesses through <span className="text-cyan-500">custom Web/App development & AI</span>
                 </h2>
-                <p className="text-slate-400 mb-8 text-base leading-relaxed">
-                  Founder of <strong className="text-white">CIT India</strong>, open-source creator behind popular tools like{' '}
-                  <strong className="text-cyan-300">kiro-pro-free (167★)</strong> and <strong className="text-cyan-300">everything-kiro (26★)</strong>, published author on Amazon, content writer at KnowledgeSense, and community leader of 450K+ members. I craft agentic tooling, formally verify Solana consensus, and deliver high-precision AI translation services.
+                <p className="text-slate-400 mb-6 text-base leading-relaxed">
+                  Founder of <strong className="text-white">CIT India</strong>. I specialize in building high-performance <strong className="text-cyan-300">Web & Mobile Applications</strong> that accelerate business digital growth, alongside autonomous AI tools, Solana protocols, published technical books, and multilingual translation services.
                 </p>
+
+                {/* Plain-English Summary for Non-Technical Visitors */}
+                <div className="mb-8 p-4 rounded-lg bg-slate-900/60 border border-slate-800 font-mono text-xs text-slate-300 space-y-2 relative overflow-hidden">
+                  <CornerBrackets />
+                  <div className="text-cyan-400 font-bold uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+                    <Sparkles size={13} /> At a Glance (What I Do):
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-300">
+                    <div className="flex items-center gap-2"><span className="text-cyan-400">🌐</span> <strong>Web & App Development:</strong> Helping businesses grow digitally</div>
+                    <div className="flex items-center gap-2"><span className="text-cyan-400">⚡</span> <strong>AI & Web3 Engineering:</strong> Autonomous tools & protocols</div>
+                    <div className="flex items-center gap-2"><span className="text-cyan-400">🏢</span> <strong>Founder @ CIT India:</strong> Custom software & agency leadership</div>
+                    <div className="flex items-center gap-2"><span className="text-cyan-400">📚</span> <strong>Author & Translator:</strong> Amazon eBooks & Multilingual AI</div>
+                  </div>
+                </div>
 
                 <div ref={statsRef} className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
                   {stats.map((s) => <StatCard key={s.label} stat={s} start={statsInView} />)}
@@ -1430,6 +1445,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* LIVE GITHUB STATS & CONTRIBUTION MATRIX */}
+        <GitHubActivity />
 
         {/* AMAZON AUTHOR & KNOWLEDGESENSE WRITING SECTION */}
         <section id="author" className="py-24 md:py-32 bg-[#080808] border-b border-white/5 relative">
