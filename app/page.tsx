@@ -7,7 +7,7 @@ import {
   Mail, MapPin, Send, Linkedin, Twitter, Star, GitFork,
   Menu, X, ArrowUpRight, Code2, Sparkles, Globe, Cpu,
   Search, BookOpen, Languages, Copy, Check, ArrowUp,
-  ShieldCheck, Layers
+  ShieldCheck, Layers, FileText, Feather
 } from 'lucide-react';
 
 interface ParticleObj {
@@ -44,7 +44,6 @@ function drawParticle(ctx: CanvasRenderingContext2D, p: ParticleObj) {
   ctx.fillRect(p.x, p.y, p.size, p.size);
 }
 
-
 // ============================================================
 //  CONFIG — single source of truth for personal data
 // ============================================================
@@ -53,9 +52,11 @@ const PROFILE = {
   role: "Full-Stack AI, Web3 & Developer Tooling Engineer",
   handle: "iamaanahmad",
   tagline:
-    "Founder @ CIT India. I build production-grade AI agents, Solana protocols, Codex tooling, and provide Multilingual AI & Translation services — shipping products that scale.",
+    "Founder @ CIT India. Author & Content Writer. I build production-grade AI agents, Solana protocols, Codex tooling, and provide Multilingual AI & Translation services — shipping products that scale.",
   location: "New Delhi, India",
-  email: "iamaanahmad@cit.org.in",
+  email: "amaan@cit.org.in",
+  resume: "/Resume.Techie.pdf",
+  photo: "/amaan-photo.jpg",
   links: {
     github: "https://github.com/iamaanahmad",
     linkedin: "https://www.linkedin.com/in/iamaanshaikh",
@@ -63,6 +64,7 @@ const PROFILE = {
     company: "https://www.cit.org.in/",
     amazonAuthor: "https://www.amazon.com/author/amaan",
     amazonBooks: "http://amazon.com/stores/author/B0F9TNJJVL/allbooks",
+    knowledgeSense: "https://www.knowledgesense.in/author/administer/",
   },
 };
 
@@ -276,7 +278,6 @@ const ParticleField = () => {
         drawParticle(ctx, p);
       });
 
-
       particles.forEach((a, i) => {
         particles.slice(i + 1).forEach((b) => {
           const dist = Math.hypot(a.x - b.x, a.y - b.y);
@@ -473,7 +474,7 @@ const ProjectModal = ({ project, onClose }: { project: Project | null; onClose: 
 };
 
 // ============================================================
-//  INTERACTIVE CLI TERMINAL COMPONENT
+//  INTERACTIVE CLI TERMINAL COMPONENT (Internal Scroll Fixed)
 // ============================================================
 const InteractiveTerminal = ({ onToast }: { onToast: (msg: string) => void }) => {
   const [history, setHistory] = useState<Array<{ type: 'input' | 'output'; text: string }>>([
@@ -481,7 +482,7 @@ const InteractiveTerminal = ({ onToast }: { onToast: (msg: string) => void }) =>
     { type: 'output', text: "Type 'help' to list available system commands." },
   ]);
   const [inputVal, setInputVal] = useState('');
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const terminalScrollRef = useRef<HTMLDivElement>(null);
 
   const handleCommand = (cmd: string) => {
     const trimmed = cmd.trim().toLowerCase();
@@ -497,8 +498,9 @@ const InteractiveTerminal = ({ onToast }: { onToast: (msg: string) => void }) =>
   whoami    - Print executive profile & mission
   projects  - List top open-source repositories & products
   skills    - Display technical arsenal & language translation skills
-  books     - View published Amazon eBooks
+  books     - View published Amazon eBooks & KnowledgeSense articles
   contact   - Display email & social endpoints
+  resume    - Download technical resume PDF
   github    - Open GitHub profile in new tab
   sudo hire - Quick hire directive
   clear     - Clear terminal buffer`,
@@ -507,7 +509,7 @@ const InteractiveTerminal = ({ onToast }: { onToast: (msg: string) => void }) =>
       case 'whoami':
         newHistory.push({
           type: 'output',
-          text: "Amaan Ahmad — Founder @ CIT India. AI/Web3 Engineer & Author. 70+ public repos on GitHub, community leader of 450K+ members.",
+          text: "Amaan Ahmad — Founder @ CIT India. AI/Web3 Engineer, Amazon Author & KnowledgeSense Content Writer. 70+ public repos on GitHub, community leader of 450K+ members.",
         });
         break;
       case 'projects':
@@ -523,10 +525,15 @@ const InteractiveTerminal = ({ onToast }: { onToast: (msg: string) => void }) =>
         });
         break;
       case 'books':
+      case 'writing':
         newHistory.push({
           type: 'output',
-          text: "AMAZON AUTHOR PROFILE:\nPublished Author on Amazon Kindle Store.\nURL: https://www.amazon.com/author/amaan",
+          text: `PUBLISHING & ARTICLES:\n- Amazon Kindle Author: ${PROFILE.links.amazonAuthor}\n- KnowledgeSense Writer: ${PROFILE.links.knowledgeSense}`,
         });
+        break;
+      case 'resume':
+        window.open(PROFILE.resume, '_blank');
+        newHistory.push({ type: 'output', text: "Downloading resume PDF..." });
         break;
       case 'contact':
         newHistory.push({
@@ -558,8 +565,11 @@ const InteractiveTerminal = ({ onToast }: { onToast: (msg: string) => void }) =>
     setInputVal('');
   };
 
+  // Scroll internal terminal box only — NOT window scrollIntoView
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (terminalScrollRef.current) {
+      terminalScrollRef.current.scrollTop = terminalScrollRef.current.scrollHeight;
+    }
   }, [history]);
 
   return (
@@ -575,21 +585,21 @@ const InteractiveTerminal = ({ onToast }: { onToast: (msg: string) => void }) =>
         <span className="text-[10px] text-cyan-500/60 uppercase">CLI 3.2</span>
       </div>
 
-      <div className="p-4 sm:p-6 overflow-y-auto flex-1 space-y-3 text-slate-300">
+      <div ref={terminalScrollRef} className="p-4 sm:p-6 overflow-y-auto flex-1 space-y-3 text-slate-300">
         {history.map((item, i) => (
           <div key={i} className={item.type === 'input' ? 'text-cyan-400 font-bold' : 'text-slate-400 whitespace-pre-wrap leading-relaxed'}>
             {item.text}
           </div>
         ))}
-        <div ref={bottomRef} />
       </div>
 
       {/* Command suggestion buttons */}
       <div className="px-4 py-2 border-t border-slate-800/60 bg-slate-950/60 flex items-center gap-2 overflow-x-auto text-[11px]">
         <span className="text-slate-500 shrink-0 font-bold">Quick:</span>
-        {['whoami', 'projects', 'skills', 'books', 'contact', 'sudo hire', 'clear'].map((cmd) => (
+        {['whoami', 'projects', 'skills', 'books', 'resume', 'contact', 'sudo hire', 'clear'].map((cmd) => (
           <button
             key={cmd}
+            type="button"
             onClick={() => handleCommand(cmd)}
             className="px-2 py-0.5 rounded bg-slate-800 text-cyan-300 hover:bg-cyan-500 hover:text-black transition-colors shrink-0 cursor-pointer"
           >
@@ -611,7 +621,7 @@ const InteractiveTerminal = ({ onToast }: { onToast: (msg: string) => void }) =>
           type="text"
           value={inputVal}
           onChange={(e) => setInputVal(e.target.value)}
-          placeholder="Type command ('help', 'projects', 'skills', 'books')..."
+          placeholder="Type command ('help', 'projects', 'skills', 'books', 'resume')..."
           className="w-full bg-transparent text-white focus:outline-none font-mono text-sm placeholder:text-slate-600"
         />
         <button type="submit" className="text-slate-500 hover:text-cyan-400 cursor-pointer">
@@ -1064,15 +1074,22 @@ export default function Home() {
   const navLinks = [
     { href: '#about', label: 'About' },
     { href: '#projects', label: 'Projects' },
-    { href: '#author', label: 'Books' },
+    { href: '#author', label: 'Books & Writing' },
     { href: '#translation', label: 'Translation' },
     { href: '#stack', label: 'Stack' },
     { href: '#contact', label: 'Contact' },
   ];
 
+  // Smooth scroll handler with offset for navbar
   const scrollTo = useCallback((id: string) => {
     setMenuOpen(false);
-    document.getElementById(id.replace('#', ''))?.scrollIntoView({ behavior: 'smooth' });
+    const targetId = id.replace('#', '');
+    const el = document.getElementById(targetId);
+    if (el) {
+      const yOffset = -80; // height of fixed navbar
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
   }, []);
 
   // Filter projects by current category and search query
@@ -1110,25 +1127,40 @@ export default function Home() {
         {/* Navbar */}
         <nav className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${scrolled ? 'bg-[#050505]/90 backdrop-blur-md py-3 border-white/10' : 'py-5 bg-transparent border-transparent'}`}>
           <div className="container mx-auto px-6 flex justify-between items-center">
-            <button onClick={() => scrollTo('#top')} className="flex items-center gap-1 font-mono font-bold text-xl tracking-tighter cursor-pointer">
+            <a href="#top" onClick={(e) => { e.preventDefault(); scrollTo('#top'); }} className="flex items-center gap-1 font-mono font-bold text-xl tracking-tighter cursor-pointer">
               <span className="text-cyan-500">&lt;</span>Amaan<span className="text-cyan-500">/&gt;</span>
-            </button>
+            </a>
 
             <div className="hidden md:flex items-center gap-6">
               <div className="flex gap-6 text-xs font-mono uppercase tracking-widest text-slate-400">
                 {navLinks.map((l) => (
-                  <button key={l.href} onClick={() => scrollTo(l.href)} className="hover:text-cyan-400 transition-colors cursor-pointer">
+                  <a
+                    key={l.href}
+                    href={l.href}
+                    onClick={(e) => { e.preventDefault(); scrollTo(l.href); }}
+                    className="hover:text-cyan-400 transition-colors cursor-pointer"
+                  >
                     /{l.label}
-                  </button>
+                  </a>
                 ))}
               </div>
-              <button
-                onClick={() => scrollTo('#contact')}
-                className="px-4 py-2 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono hover:bg-emerald-500 hover:text-black transition-all flex items-center gap-2 cursor-pointer"
+              <a
+                href={PROFILE.resume}
+                download="Amaan_Ahmad_Resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="px-3.5 py-1.5 rounded bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 text-xs font-mono hover:bg-emerald-500 hover:text-black transition-all flex items-center gap-1.5 cursor-pointer"
+              >
+                <FileText size={13} /> Resume
+              </a>
+              <a
+                href="#contact"
+                onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}
+                className="px-4 py-1.5 rounded bg-cyan-500 text-black text-xs font-mono font-bold hover:bg-cyan-400 transition-all flex items-center gap-2 cursor-pointer"
               >
                 <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
                 Hire Me
-              </button>
+              </a>
             </div>
 
             <button className="md:hidden text-white cursor-pointer" onClick={() => setMenuOpen((v) => !v)} aria-label="Toggle menu">
@@ -1146,78 +1178,146 @@ export default function Home() {
               >
                 <div className="flex flex-col px-6 py-4 gap-4 font-mono text-sm uppercase tracking-widest text-slate-300">
                   {navLinks.map((l) => (
-                    <button key={l.href} onClick={() => scrollTo(l.href)} className="text-left hover:text-cyan-400 transition-colors cursor-pointer">
+                    <a
+                      key={l.href}
+                      href={l.href}
+                      onClick={(e) => { e.preventDefault(); scrollTo(l.href); }}
+                      className="text-left hover:text-cyan-400 transition-colors cursor-pointer"
+                    >
                       /{l.label}
-                    </button>
+                    </a>
                   ))}
-                  <button onClick={() => scrollTo('#contact')} className="text-left text-emerald-400 cursor-pointer">/Hire Me</button>
+                  <a
+                    href={PROFILE.resume}
+                    download="Amaan_Ahmad_Resume.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-left text-emerald-400 flex items-center gap-2"
+                  >
+                    <FileText size={14} /> /Download Resume
+                  </a>
+                  <a
+                    href="#contact"
+                    onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}
+                    className="text-left text-cyan-400"
+                  >
+                    /Hire Me
+                  </a>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
         </nav>
 
-        {/* HERO */}
-        <section id="top" className="relative min-h-screen flex items-center justify-center pt-20 border-b border-white/5">
+        {/* HERO SECTION WITH AMAAN'S PHOTO & RESUME DOWNLOAD */}
+        <section id="top" className="relative min-h-screen flex items-center justify-center pt-24 pb-16 border-b border-white/5">
           <ParticleField />
           <div className="container mx-auto px-6 relative z-10">
-            <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
-                <div className="px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 text-xs font-mono uppercase tracking-widest flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-                  Available for Hire & AI/Web3 Projects
+            <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 max-w-6xl mx-auto">
+              
+              {/* Left Column: Text & CTAs */}
+              <div className="flex flex-col items-center lg:items-start text-center lg:text-left flex-1">
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
+                  <div className="px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 text-xs font-mono uppercase tracking-widest flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
+                    Available for Hire & AI/Web3 Collaborations
+                  </div>
+                </motion.div>
+
+                <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tighter mb-4 leading-[0.98]">
+                  <DecryptedText text="AMAAN AHMAD" className="text-white block" />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 block mt-2 text-2xl sm:text-3xl md:text-4xl">
+                    {PROFILE.role}
+                  </span>
+                </h1>
+
+                <motion.p
+                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
+                  className="text-base md:text-lg text-slate-400 max-w-2xl mb-8 leading-relaxed"
+                >
+                  {PROFILE.tagline}
+                </motion.p>
+
+                {/* Primary Actions including Download Resume */}
+                <div className="flex flex-wrap gap-4 justify-center lg:justify-start mb-10 w-full sm:w-auto">
+                  <MagneticButton variant="primary" onClick={() => scrollTo('#projects')}>
+                    Explore Projects <ChevronRight size={16} />
+                  </MagneticButton>
+                  <a
+                    href={PROFILE.resume}
+                    download="Amaan_Ahmad_Resume.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="relative px-6 py-3 rounded-md font-mono text-sm uppercase tracking-wider transition-all duration-300 border bg-emerald-500/10 border-emerald-500/50 text-emerald-300 hover:bg-emerald-500 hover:text-black flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(16,185,129,0.15)]"
+                  >
+                    <FileText size={16} /> Download Resume
+                  </a>
+                  <MagneticButton variant="secondary" onClick={() => scrollTo('#contact')}>
+                    <Mail size={16} /> Get in Touch
+                  </MagneticButton>
+                </div>
+
+                {/* Social row */}
+                <div className="flex items-center gap-3 flex-wrap justify-center lg:justify-start">
+                  {[
+                    { icon: <Github size={16} />, href: PROFILE.links.github, label: 'GitHub' },
+                    { icon: <Linkedin size={16} />, href: PROFILE.links.linkedin, label: 'LinkedIn' },
+                    { icon: <Twitter size={16} />, href: PROFILE.links.twitter, label: 'Twitter' },
+                    { icon: <BookOpen size={16} />, href: PROFILE.links.amazonAuthor, label: 'Amazon Author' },
+                    { icon: <Feather size={16} />, href: PROFILE.links.knowledgeSense, label: 'KnowledgeSense' },
+                  ].map((s) => (
+                    <a
+                      key={s.label}
+                      href={s.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={s.label}
+                      title={s.label}
+                      className="px-3 py-2 rounded-md border border-slate-800 bg-slate-900/60 text-slate-400 hover:text-cyan-300 hover:border-cyan-500/50 hover:-translate-y-0.5 transition-all flex items-center gap-2 text-xs font-mono"
+                    >
+                      {s.icon}
+                      <span>{s.label}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right Column: Beautiful Cyberpunk Framed Photo */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="relative shrink-0"
+              >
+                <div className="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-2xl overflow-hidden border-2 border-cyan-500/40 shadow-[0_0_40px_rgba(6,182,212,0.25)] group bg-slate-900">
+                  <CornerBrackets />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={PROFILE.photo}
+                    alt={PROFILE.name}
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent pointer-events-none" />
+                  
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono bg-slate-950/85 backdrop-blur-md px-3 py-1.5 rounded border border-cyan-500/30 text-cyan-300">
+                    <span className="flex items-center gap-1.5 font-bold">
+                      <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
+                      FOUNDER @ CIT INDIA
+                    </span>
+                    <span className="text-slate-400">NEW DELHI, IN</span>
+                  </div>
+                </div>
+
+                {/* Floating Micro-Badge */}
+                <div className="absolute -top-3 -right-3 bg-cyan-500 text-black font-mono text-[10px] font-bold px-3 py-1 rounded-full shadow-lg border border-cyan-300 uppercase tracking-widest hidden sm:block">
+                  AI & Web3 Architect
                 </div>
               </motion.div>
 
-              <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tighter mb-6 leading-[0.95]">
-                <DecryptedText text="AMAAN AHMAD" className="text-white block" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 block mt-2 text-2xl sm:text-3xl md:text-5xl">
-                  {PROFILE.role}
-                </span>
-              </h1>
-
-              <motion.p
-                initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
-                className="text-base md:text-lg text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed"
-              >
-                {PROFILE.tagline}
-              </motion.p>
-
-              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center mb-12">
-                <MagneticButton variant="primary" onClick={() => scrollTo('#projects')}>
-                  Explore Projects <ChevronRight size={16} />
-                </MagneticButton>
-                <MagneticButton variant="secondary" onClick={() => scrollTo('#contact')}>
-                  <Mail size={16} /> Get in Touch
-                </MagneticButton>
-              </div>
-
-              {/* Social row */}
-              <div className="flex items-center gap-4 flex-wrap justify-center">
-                {[
-                  { icon: <Github size={18} />, href: PROFILE.links.github, label: 'GitHub' },
-                  { icon: <Linkedin size={18} />, href: PROFILE.links.linkedin, label: 'LinkedIn' },
-                  { icon: <Twitter size={18} />, href: PROFILE.links.twitter, label: 'Twitter' },
-                  { icon: <BookOpen size={18} />, href: PROFILE.links.amazonAuthor, label: 'Amazon Author Profile' },
-                ].map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={s.label}
-                    title={s.label}
-                    className="p-2.5 rounded-md border border-slate-800 text-slate-400 hover:text-cyan-300 hover:border-cyan-500/50 hover:-translate-y-0.5 transition-all flex items-center gap-2 text-xs font-mono"
-                  >
-                    {s.icon}
-                    <span>{s.label}</span>
-                  </a>
-                ))}
-              </div>
             </div>
           </div>
 
-          <div className="absolute bottom-6 left-0 w-full px-6 hidden md:flex justify-between text-[10px] font-mono text-slate-600 uppercase tracking-widest">
+          <div className="absolute bottom-6 left-0 w-full px-6 hidden lg:flex justify-between text-[10px] font-mono text-slate-600 uppercase tracking-widest">
             <span>Repos: {gh?.repos ?? 74}+ (167★ Top)</span>
             <span>Community: 450K+</span>
             <span>Focus: AI Agents · Solana · Tooling · Translation</span>
@@ -1242,7 +1342,7 @@ export default function Home() {
                 </h2>
                 <p className="text-slate-400 mb-8 text-base leading-relaxed">
                   Founder of <strong className="text-white">CIT India</strong>, open-source creator behind popular tools like{' '}
-                  <strong className="text-cyan-300">kiro-pro-free (167★)</strong> and <strong className="text-cyan-300">everything-kiro (26★)</strong>, author on Amazon, and community leader of 450K+ members. I craft agentic tooling, formally verify Solana consensus, and deliver high-precision AI translation services.
+                  <strong className="text-cyan-300">kiro-pro-free (167★)</strong> and <strong className="text-cyan-300">everything-kiro (26★)</strong>, published author on Amazon, content writer at KnowledgeSense, and community leader of 450K+ members. I craft agentic tooling, formally verify Solana consensus, and deliver high-precision AI translation services.
                 </p>
 
                 <div ref={statsRef} className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
@@ -1255,30 +1355,42 @@ export default function Home() {
           </div>
         </section>
 
-        {/* PROJECTS WITH LIVE SEARCH */}
+        {/* PROJECTS WITH IMPROVED CATEGORY FILTER BAR */}
         <section id="projects" className="py-24 md:py-32 border-b border-white/5 bg-[#050505] relative">
           <div className="absolute top-0 right-0 w-1/3 h-full bg-cyan-900/5 blur-[120px] pointer-events-none" />
           <div className="container mx-auto px-6 relative z-10">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8">
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-10">
               <div>
                 <div className="text-cyan-500 font-mono text-xs uppercase tracking-widest mb-2">/ Featured Work & Tooling</div>
                 <h2 className="text-3xl md:text-5xl font-bold">Curated Repos & Services</h2>
               </div>
 
-              {/* Category tabs */}
-              <div className="flex bg-slate-900 border border-slate-800 rounded-md p-1 flex-wrap gap-1">
-                {(Object.keys(PROJECT_GROUPS) as Category[]).map((key) => (
-                  <button
-                    key={key}
-                    onClick={() => setCategory(key)}
-                    className={`px-3.5 py-2 text-xs font-mono uppercase tracking-wider rounded transition-all duration-300 flex items-center gap-2 cursor-pointer ${
-                      category === key ? 'bg-cyan-500 text-black font-bold' : 'text-slate-400 hover:text-white'
-                    }`}
-                  >
-                    {PROJECT_GROUPS[key].icon}
-                    {PROJECT_GROUPS[key].label}
-                  </button>
-                ))}
+              {/* Improved Category Filter Box UI (Agency Design System) */}
+              <div className="w-full lg:w-auto bg-slate-900/80 border border-slate-800 p-1.5 rounded-xl shadow-2xl backdrop-blur-md relative overflow-hidden">
+                <CornerBrackets />
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 font-mono text-xs">
+                  {(Object.keys(PROJECT_GROUPS) as Category[]).map((key) => {
+                    const isSelected = category === key;
+                    const group = PROJECT_GROUPS[key];
+                    return (
+                      <button
+                        key={key}
+                        onClick={() => setCategory(key)}
+                        className={`relative px-4 py-2.5 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer border ${
+                          isSelected
+                            ? 'bg-cyan-500 text-black border-cyan-400 font-bold shadow-[0_0_15px_rgba(6,182,212,0.3)]'
+                            : 'bg-slate-950/60 text-slate-400 border-slate-800 hover:text-white hover:border-slate-700'
+                        }`}
+                      >
+                        <span>{group.icon}</span>
+                        <span className="truncate">{group.label}</span>
+                        <span className={`text-[10px] px-1.5 py-0.2 rounded font-mono ${isSelected ? 'bg-black/20 text-black' : 'bg-slate-800 text-slate-400'}`}>
+                          {group.data.length}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
@@ -1319,43 +1431,25 @@ export default function Home() {
           </div>
         </section>
 
-        {/* AMAZON AUTHOR & EBOOKS SECTION */}
+        {/* AMAZON AUTHOR & KNOWLEDGESENSE WRITING SECTION */}
         <section id="author" className="py-24 md:py-32 bg-[#080808] border-b border-white/5 relative">
           <div className="container mx-auto px-6">
-            <div className="flex flex-col lg:flex-row items-center gap-12">
-              <div className="w-full lg:w-1/2">
-                <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 border border-yellow-500/30 rounded-full bg-yellow-500/5 text-yellow-400 text-xs font-mono uppercase tracking-widest">
-                  <BookOpen size={14} /> Amazon Kindle Author
-                </div>
-                <h2 className="text-3xl md:text-5xl font-bold mb-6">Published Author & Technical Writer</h2>
-                <p className="text-slate-400 text-base md:text-lg leading-relaxed mb-8">
-                  Beyond software engineering, I author specialized digital books and technical handbooks available globally on the <strong className="text-white">Amazon Kindle Store</strong>. Explore my published work and author profile on Amazon.
-                </p>
-
-                <div className="flex flex-wrap gap-4">
-                  <a
-                    href={PROFILE.links.amazonAuthor}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-6 py-3 rounded-md bg-yellow-500 text-black font-mono font-bold text-xs uppercase tracking-wider hover:bg-yellow-400 transition-colors flex items-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(234,179,8,0.2)]"
-                  >
-                    <BookOpen size={16} /> Visit Amazon Author Page
-                  </a>
-                  <a
-                    href={PROFILE.links.amazonBooks}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-6 py-3 rounded-md border border-slate-700 text-slate-300 font-mono text-xs uppercase tracking-wider hover:border-white hover:text-white transition-colors flex items-center gap-2 cursor-pointer"
-                  >
-                    <ExternalLink size={16} /> View Kindle eBooks Catalog
-                  </a>
-                </div>
+            <div className="text-center max-w-3xl mx-auto mb-14">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 mb-4 border border-yellow-500/30 rounded-full bg-yellow-500/5 text-yellow-400 text-xs font-mono uppercase tracking-widest">
+                <BookOpen size={14} /> Publications & Editorial Writing
               </div>
+              <h2 className="text-3xl md:text-5xl font-bold mb-4">Published Author & Content Writer</h2>
+              <p className="text-slate-400 text-base md:text-lg">
+                Authoring technical handbooks on the <strong className="text-white">Amazon Kindle Store</strong> and publishing articles on <strong className="text-cyan-300">KnowledgeSense</strong>.
+              </p>
+            </div>
 
-              <div className="w-full lg:w-1/2">
-                <div className="bg-slate-900/60 border border-slate-800 rounded-lg p-6 sm:p-8 relative overflow-hidden font-mono">
-                  <CornerBrackets />
-                  <div className="flex items-center justify-between mb-6 border-b border-slate-800 pb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {/* Amazon Kindle Author Card */}
+              <div className="bg-slate-900/60 border border-yellow-500/30 hover:border-yellow-500/60 rounded-xl p-6 sm:p-8 relative overflow-hidden font-mono transition-colors flex flex-col justify-between">
+                <CornerBrackets />
+                <div>
+                  <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-4">
                     <div className="flex items-center gap-3">
                       <div className="p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-md text-yellow-400">
                         <BookOpen size={24} />
@@ -1365,24 +1459,63 @@ export default function Home() {
                         <p className="text-slate-500 text-xs">Author Handle: Amaan Ahmad</p>
                       </div>
                     </div>
-                    <span className="text-xs bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded border border-emerald-500/30 font-bold">VERIFIED AUTHOR</span>
+                    <span className="text-[10px] bg-yellow-500/10 text-yellow-400 px-2.5 py-1 rounded border border-yellow-500/30 font-bold">KINDLE AUTHOR</span>
                   </div>
+                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6">
+                    Author of technical books and developer reference manuals published globally on the Amazon Kindle store.
+                  </p>
+                </div>
 
-                  <div className="space-y-4 mb-6">
-                    <div className="p-4 bg-slate-950 border border-slate-800/80 rounded">
-                      <h5 className="text-cyan-300 font-bold text-sm mb-1">eBooks & Publishing Catalog</h5>
-                      <p className="text-slate-400 text-xs leading-relaxed">
-                        Author of specialized digital titles covering developer workflows, technology insights, and specialized topics.
-                      </p>
+                <div className="flex flex-wrap gap-3 pt-4 border-t border-slate-800/80">
+                  <a
+                    href={PROFILE.links.amazonAuthor}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-4 py-2 rounded bg-yellow-500 text-black font-bold text-xs hover:bg-yellow-400 transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <BookOpen size={14} /> Amazon Author Profile <ArrowUpRight size={13} />
+                  </a>
+                  <a
+                    href={PROFILE.links.amazonBooks}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-4 py-2 rounded border border-slate-700 text-slate-300 text-xs hover:border-white hover:text-white transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+                  >
+                    eBooks Store <ExternalLink size={13} />
+                  </a>
+                </div>
+              </div>
+
+              {/* KnowledgeSense Content Writer Card */}
+              <div className="bg-slate-900/60 border border-cyan-500/30 hover:border-cyan-500/60 rounded-xl p-6 sm:p-8 relative overflow-hidden font-mono transition-colors flex flex-col justify-between">
+                <CornerBrackets />
+                <div>
+                  <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-3 bg-cyan-500/10 border border-cyan-500/30 rounded-md text-cyan-400">
+                        <Feather size={24} />
+                      </div>
+                      <div>
+                        <h4 className="text-white font-bold text-lg">KnowledgeSense</h4>
+                        <p className="text-slate-500 text-xs">Editorial Content Writer</p>
+                      </div>
                     </div>
+                    <span className="text-[10px] bg-cyan-500/10 text-cyan-400 px-2.5 py-1 rounded border border-cyan-500/30 font-bold">CONTENT WRITER</span>
                   </div>
+                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6">
+                    Content writer and editor at KnowledgeSense crafting in-depth articles, technology tutorials, and insightful guides.
+                  </p>
+                </div>
 
-                  <div className="flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-800/60">
-                    <span>Global Distribution</span>
-                    <a href={PROFILE.links.amazonAuthor} target="_blank" rel="noreferrer" className="text-cyan-400 hover:text-white flex items-center gap-1">
-                      amazon.com/author/amaan <ArrowUpRight size={12} />
-                    </a>
-                  </div>
+                <div className="pt-4 border-t border-slate-800/80">
+                  <a
+                    href={PROFILE.links.knowledgeSense}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-4 py-2 rounded bg-cyan-500 text-black font-bold text-xs hover:bg-cyan-400 transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <Feather size={14} /> KnowledgeSense Author Page <ArrowUpRight size={13} />
+                  </a>
                 </div>
               </div>
             </div>
@@ -1517,13 +1650,25 @@ export default function Home() {
                     <div className="flex flex-wrap gap-3 font-mono text-xs">
                       <a href={PROFILE.links.amazonAuthor} target="_blank" rel="noreferrer" className="text-yellow-400 hover:text-white">Amazon Author</a>
                       <span className="text-slate-700">·</span>
+                      <a href={PROFILE.links.knowledgeSense} target="_blank" rel="noreferrer" className="text-cyan-400 hover:text-white">KnowledgeSense</a>
+                      <span className="text-slate-700">·</span>
                       <a href={PROFILE.links.github} target="_blank" rel="noreferrer" className="text-cyan-400 hover:text-white">GitHub</a>
                       <span className="text-slate-700">·</span>
                       <a href={PROFILE.links.linkedin} target="_blank" rel="noreferrer" className="text-cyan-400 hover:text-white">LinkedIn</a>
-                      <span className="text-slate-700">·</span>
-                      <a href={PROFILE.links.twitter} target="_blank" rel="noreferrer" className="text-cyan-400 hover:text-white">Twitter</a>
                     </div>
                   </div>
+                </div>
+
+                <div className="pt-2">
+                  <a
+                    href={PROFILE.resume}
+                    download="Amaan_Ahmad_Resume.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 font-mono text-xs hover:bg-emerald-500 hover:text-black transition-colors"
+                  >
+                    <FileText size={16} /> Download Full Resume PDF
+                  </a>
                 </div>
               </div>
 
@@ -1578,8 +1723,9 @@ export default function Home() {
               &copy; {new Date().getFullYear()} {PROFILE.name} ·{' '}
               <a href={PROFILE.links.company} target="_blank" rel="noreferrer" className="hover:text-cyan-400">CIT India</a>
             </div>
-            <div className="flex gap-6">
+            <div className="flex gap-6 flex-wrap">
               <a href={PROFILE.links.amazonAuthor} target="_blank" rel="noreferrer" className="hover:text-yellow-400">AMAZON AUTHOR</a>
+              <a href={PROFILE.links.knowledgeSense} target="_blank" rel="noreferrer" className="hover:text-cyan-400">KNOWLEDGESENSE</a>
               <a href={PROFILE.links.github} target="_blank" rel="noreferrer" className="hover:text-cyan-400">GITHUB</a>
               <a href={PROFILE.links.linkedin} target="_blank" rel="noreferrer" className="hover:text-cyan-400">LINKEDIN</a>
               <a href={PROFILE.links.twitter} target="_blank" rel="noreferrer" className="hover:text-cyan-400">TWITTER</a>
