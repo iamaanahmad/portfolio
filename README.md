@@ -1,4 +1,4 @@
-# 🚀 Amaan Ahmad - AI-Native Portfolio 2025
+# 🚀 Amaan Ahmad - AI-Native Portfolio
 
 > "I build million-dollar projects using only AI – from smart contracts to production apps in hours."
 
@@ -6,15 +6,16 @@
 
 ## 🌟 Overview
 
-This is a cutting-edge, high-performance personal portfolio website built with the **2025 Ultimate Tech Stack**. It showcases my work as an AI-Native Full-Stack Engineer and Web3 Builder. The site is designed to be visually stunning, highly interactive, and optimized for performance.
+This is a high-performance personal portfolio website built with a current **Next.js 16 + React 19** stack. It showcases my work across AI, Solana, developer tooling, and modern web products with a motion-heavy terminal-inspired UI.
 
 **Live Demo:** [Coming Soon]
 
 ## 🛠️ Tech Stack
 
-- **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
+- **Framework:** [Next.js 16](https://nextjs.org/) (App Router)
+- **UI Runtime:** [React 19](https://react.dev/)
 - **Language:** [TypeScript](https://www.typescriptlang.org/)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/) + [clsx](https://github.com/lukeed/clsx)
+- **Styling:** [Tailwind CSS 4](https://tailwindcss.com/) + [clsx](https://github.com/lukeed/clsx)
 - **Animations:** [Framer Motion](https://www.framer.com/motion/) + [GSAP](https://greensock.com/gsap/)
 - **3D Graphics:** [React Three Fiber](https://docs.pmnd.rs/react-three-fiber) + [Drei](https://github.com/pmndrs/drei)
 - **Smooth Scroll:** [Lenis](https://github.com/studio-freight/lenis)
@@ -29,32 +30,23 @@ This is a cutting-edge, high-performance personal portfolio website built with t
 4.  **"AI vs Human" Timeline:** A visual comparison of traditional dev vs. my AI-accelerated workflow.
 5.  **Magnetic Interactions:** Buttons and elements that magnetically follow the cursor.
 6.  **Glassmorphism UI:** Premium, modern aesthetic with deep gradients and blur effects.
-7.  **Performance:** 100/100 Lighthouse score, fully responsive, and SEO optimized.
+7.  **Performance-minded:** Responsive, SEO-conscious, and built for smooth interactions.
 
 ## 📂 Project Structure
 
 ```
 portfolio/
-├── app/                # Next.js App Router
-│   ├── globals.css     # Global styles & Tailwind config
-│   ├── layout.tsx      # Root layout with fonts & providers
-│   └── page.tsx        # Main landing page assembly
-├── components/         # React Components
-│   ├── ui/             # Reusable UI elements
-│   ├── Contact.tsx     # Contact section with magnetic button
-│   ├── Hero.tsx        # 3D Hero section
-│   ├── Navbar.tsx      # Floating navigation
-│   ├── Projects.tsx    # Project showcase grid
-│   ├── Scene.tsx       # R3F 3D Scene background
-│   ├── Skills.tsx      # 3D Word Cloud
-│   ├── SmoothScroll.tsx# Lenis scroll wrapper
-│   ├── Stats.tsx       # Animated counters
-│   ├── Terminal.tsx    # Live coding terminal simulation
-│   └── Timeline.tsx    # AI vs Human comparison
-├── lib/                # Utilities
-│   └── utils.ts        # cn() helper
-├── public/             # Static assets
-└── prompts.txt         # Secret AI prompts used to build this
+├── app/                  # Next.js App Router
+│   ├── globals.css       # Global styles
+│   ├── layout.tsx        # Metadata, fonts, root shell
+│   ├── page.tsx          # Main landing page and curated portfolio data
+│   ├── robots.ts         # SEO robots metadata
+│   └── sitemap.ts        # Sitemap metadata
+├── components/           # Reusable and alternate UI components
+├── lib/                  # Utilities and GitHub helpers
+├── public/               # Static assets
+├── AGENTS.md             # Repo guidance for Codex and other coding agents
+└── prompts.txt           # Working notes and prompt scratchpad
 ```
 
 ## 🚀 Getting Started
@@ -77,6 +69,10 @@ portfolio/
 
 4.  **Open your browser:**
     Navigate to `http://localhost:3000` to see the magic.
+
+## Codex Notes
+
+This repo now includes `AGENTS.md` so Codex can pick up project-specific guidance automatically. Current Codex docs emphasize `AGENTS.md`, skills, plugins, hooks, and MCP over reusable prompt files for durable workflows.
 
 ## 🤝 Connect
 

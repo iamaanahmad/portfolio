@@ -49,7 +49,7 @@ export default function Hero() {
                         ⚡ Building the Future with AI & Web3
                     </motion.h2>
                     <h1 className="text-5xl md:text-8xl font-bold mb-6 tracking-tight">
-                        I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-secondary">Amaan Ahmad</span>
+                        I&apos;m <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-secondary">Amaan Ahmad</span>
                     </h1>
 
                     <div className="text-2xl md:text-4xl font-light text-muted-foreground mb-8 h-[60px]">
@@ -70,7 +70,7 @@ export default function Hero() {
                         </Link>
                         <Link href="#contact">
                             <button className="px-8 py-4 bg-transparent border-2 border-border hover:bg-accent/10 hover:border-accent text-foreground rounded-full font-bold text-lg transition-all hover:scale-105 backdrop-blur-sm flex items-center gap-2">
-                                <span>💬</span> Let's Talk
+                                <span>💬</span> Let&apos;s Talk
                             </button>
                         </Link>
                     </div>

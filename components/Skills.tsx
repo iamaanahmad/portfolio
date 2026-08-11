@@ -35,13 +35,14 @@ function Word({ children, position, onClick }: { children: string, position: [nu
                 onClick={() => onClick(children)}
                 position={position}
                 {...fontProps}
-                children={children}
-            />
+            >
+                {children}
+            </Text>
         </Float>
     );
 }
 
-function Cloud({ count = 4, radius = 20, onSelect }: { count?: number, radius?: number, onSelect: (skill: string) => void }) {
+function Cloud({ radius = 20, onSelect }: { count?: number, radius?: number, onSelect: (skill: string) => void }) {
     // Create a spherical distribution of points
     const words = useMemo(() => {
         const temp = [];
@@ -55,7 +56,7 @@ function Cloud({ count = 4, radius = 20, onSelect }: { count?: number, radius?: 
             temp.push([new THREE.Vector3().setFromSpherical(spherical), skills[i]] as const);
         }
         return temp;
-    }, [count, radius]);
+    }, [radius]);
 
     return (
         <>

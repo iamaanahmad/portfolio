@@ -47,10 +47,10 @@ export default function Contact() {
                     className="text-center mb-16"
                 >
                     <h2 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-                        Let's <span className="text-primary">Build</span>
+                        Let&apos;s <span className="text-primary">Build</span>
                     </h2>
                     <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                        Have a project in mind? Let's turn your vision into reality.
+                        Have a project in mind? Let&apos;s turn your vision into reality.
                     </p>
                 </motion.div>
 
@@ -100,7 +100,7 @@ export default function Contact() {
                                     <Send className="text-white" size={32} />
                                 </motion.div>
                                 <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
-                                <p className="text-muted-foreground">I'll get back to you as soon as possible.</p>
+                                <p className="text-muted-foreground">I&apos;ll get back to you as soon as possible.</p>
                             </div>
                         )}
 

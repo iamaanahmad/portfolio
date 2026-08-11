@@ -26,7 +26,6 @@ function Counter({ value, duration = 2 }: { value: number, duration?: number }) 
 
     useEffect(() => {
         if (isInView) {
-            let start = 0;
             const end = value;
             const totalFrames = Math.round(duration * 60);
             let frame = 0;

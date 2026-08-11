@@ -41,7 +41,7 @@ export default function About() {
                                 <span className="text-primary">Web3 Innovator</span>
                             </h2>
                             <p className="text-lg text-muted-foreground leading-relaxed">
-                                I'm Amaan Ahmad, a visionary builder bridging the gap between traditional tech and the decentralized future.
+                                I&apos;m Amaan Ahmad, a visionary builder bridging the gap between traditional tech and the decentralized future.
                                 With a passion for AI-driven development, I craft digital experiences that are not just functional but revolutionary.
                             </p>
                         </div>

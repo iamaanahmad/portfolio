@@ -8,7 +8,11 @@ interface GitHubActivity {
     type: string;
     repo: { name: string };
     created_at: string;
-    payload: any;
+    payload: {
+        commits?: Array<unknown>;
+        ref_type?: string;
+        action?: string;
+    };
 }
 
 interface ContributionDay {
