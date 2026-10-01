@@ -78,7 +78,7 @@ This repo now includes `AGENTS.md` so Codex can pick up project-specific guidanc
 
 - **GitHub:** [@iamaanahmad](https://github.com/iamaanahmad)
 - **Twitter:** [@i_amaanahmad](https://x.com/i_amaanahmad)
-- **LinkedIn:** [Amaan Ahmad](https://linkedin.com/in/iamaanshaikh)
+- **LinkedIn:** [Amaan Ahmad](https://linkedin.com/in/iamaanahmad)
 - **Email:** [iamaanahmad@cit.org.in](mailto:iamaanahmad@cit.org.in)
 
 ---

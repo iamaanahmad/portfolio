@@ -11,7 +11,7 @@ const defaultResumeData = {
     title: "AI-Native Full-Stack Engineer",
     contact: {
         email: "iamaanahmad@cit.org.in",
-        linkedin: "linkedin.com/in/iamaanshaikh",
+        linkedin: "linkedin.com/in/iamaanahmad",
         github: "github.com/iamaanahmad",
         location: "India"
     },

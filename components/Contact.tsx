@@ -78,7 +78,7 @@ export default function Contact() {
                                     </div>
                                     <span className="text-lg">@i_amaanahmad</span>
                                 </Link>
-                                <Link href="https://linkedin.com/in/iamaanshaikh" target="_blank" className="flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors group">
+                                <Link href="https://linkedin.com/in/iamaanahmad" target="_blank" className="flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors group">
                                     <div className="p-3 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
                                         <Linkedin size={24} />
                                     </div>

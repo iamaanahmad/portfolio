@@ -66,7 +66,7 @@ export default function Navbar() {
                             <Link href="https://x.com/i_amaanahmad" target="_blank" className="text-muted-foreground hover:text-foreground transition-colors">
                                 <Twitter size={20} />
                             </Link>
-                            <Link href="https://linkedin.com/in/iamaanshaikh" target="_blank" className="text-muted-foreground hover:text-foreground transition-colors">
+                            <Link href="https://linkedin.com/in/iamaanahmad" target="_blank" className="text-muted-foreground hover:text-foreground transition-colors">
                                 <Linkedin size={20} />
                             </Link>
                         </div>
@@ -116,7 +116,7 @@ export default function Navbar() {
                                 <Link href="https://x.com/i_amaanahmad" target="_blank" className="text-muted-foreground hover:text-foreground">
                                     <Twitter size={24} />
                                 </Link>
-                                <Link href="https://linkedin.com/in/iamaanshaikh" target="_blank" className="text-muted-foreground hover:text-foreground">
+                                <Link href="https://linkedin.com/in/iamaanahmad" target="_blank" className="text-muted-foreground hover:text-foreground">
                                     <Linkedin size={24} />
                                 </Link>
                             </div>

@@ -60,7 +60,7 @@ const PROFILE = {
   photo: "/amaan-photo.jpg",
   links: {
     github: "https://github.com/iamaanahmad",
-    linkedin: "https://www.linkedin.com/in/iamaanshaikh",
+    linkedin: "https://linkedin.com/in/iamaanahmad",
     twitter: "https://x.com/i_amaanahmad",
     company: "https://www.cit.org.in/",
     amazonAuthor: "https://www.amazon.com/author/amaan",
@@ -663,6 +663,39 @@ const ExperienceTimeline = () => {
   );
 };
 
+const EducationTimeline = () => {
+  const educationItems = [
+    {
+      year: "Feb 2025 – Apr 2028",
+      degree: "Bachelor of Information Technology",
+      institution: "Maulana Mazharul Haque Arabic and Persian University (MMHAPU), Patna",
+      field: "Computer Science",
+      desc: "Currently pursuing Bachelor's degree in Information Technology with focus on Computer Science fundamentals and modern software development practices.",
+    },
+    {
+      year: "Jun 2020 – Jul 2023",
+      degree: "Diploma in Electrical and Electronics Engineering",
+      institution: "Maulana Azad National Urdu University, Hyderabad",
+      field: "Electrical & Electronics Engineering",
+      desc: "Core coursework in Electrical & Electronics Engineering fundamentals. Practical experience in technical systems, hardware, and IT concepts.",
+    },
+  ];
+
+  return (
+    <div className="relative border-l border-slate-800 ml-4 space-y-8 py-2">
+      {educationItems.map((item, i) => (
+        <motion.div key={i} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="relative pl-8 group">
+          <div className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-slate-800 border border-slate-600 group-hover:bg-cyan-500 group-hover:border-cyan-400 transition-colors" />
+          <div className="font-mono text-xs text-cyan-500 mb-1">{item.year}</div>
+          <h4 className="text-lg font-bold text-white mb-1">{item.degree}</h4>
+          <p className="text-sm text-slate-300 mb-1 font-semibold">{item.institution}</p>
+          <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
 const TechMarquee = ({ items, reverse = false }: { items: string[]; reverse?: boolean }) => (
   <div className="flex overflow-hidden py-4 group relative select-none">
     <div className={`flex gap-6 ${reverse ? 'animate-marquee-reverse' : 'animate-marquee'} group-hover:[animation-play-state:paused]`}>
@@ -893,14 +926,6 @@ const translationServices: Project[] = [
     status: "Language AI",
     link: PROFILE.links.github,
     metric: "RLHF Datasets",
-  },
-  {
-    title: "Contextual Transliteration & Subtitling",
-    desc: "High-speed phonetic transliteration and video subtitling preserving cultural context, idiom fidelity, and emotional tone.",
-    tech: ["Transliteration", "Subtitling", "Audio-Visual", "Localization"],
-    status: "Language AI",
-    link: PROFILE.links.github,
-    metric: "Media Subtitles",
   },
   {
     title: "Cross-Language Translation & Localization",
@@ -1393,6 +1418,20 @@ export default function Home() {
                 </div>
 
                 <ExperienceTimeline />
+
+                {/* Education Section */}
+                <div className="mt-16 pt-8 border-t border-slate-800">
+                  <div className="mb-8">
+                    <div className="text-cyan-500 font-mono text-xs uppercase tracking-widest mb-2">/ Education</div>
+                    <h3 className="text-2xl md:text-3xl font-bold mb-2">
+                      Academic <span className="text-cyan-500">Background</span>
+                    </h3>
+                    <p className="text-slate-400 text-sm">
+                      Formal education in engineering and computer science.
+                    </p>
+                  </div>
+                  <EducationTimeline />
+                </div>
               </div>
             </div>
           </div>

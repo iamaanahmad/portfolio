@@ -77,7 +77,7 @@ export default function RootLayout({
         image: "https://amaan.cit.org.in/amaan-photo.jpg",
         sameAs: [
           "https://github.com/iamaanahmad",
-          "https://www.linkedin.com/in/iamaanshaikh",
+          "https://linkedin.com/in/iamaanahmad",
           "https://x.com/i_amaanahmad",
           "https://www.amazon.com/author/amaan",
           "https://www.knowledgesense.in/author/administer/"
